@@ -1,19 +1,42 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assests/Sprites/ball.png" type="Texture" id=2]
+[ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=3]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0 ), 0.0, 1.4, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 1, 0, 0, 0, 1, 0, 0, 0.309804 )
+
+[sub_resource type="CircleShape2D" id=3]
 radius = 7.62661
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
+run_speed = 200
 jump_height = -600
+gravity = 1000
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
-offset = Vector2( 0, -16 )
+offset = Vector2( 0, -8 )
+
+[node name="Trail2D" type="Line2D" parent="."]
+position = Vector2( 0, -7.96668 )
+points = PoolVector2Array( 9.19654, -7.34974 )
+width = 15.0
+width_curve = SubResource( 1 )
+gradient = SubResource( 2 )
+script = ExtResource( 3 )
+lifetime = 0.1
+distance = 1.0
+segments = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -15.9195 )
-shape = SubResource( 1 )
+position = Vector2( 0, -7.96668 )
+shape = SubResource( 3 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
