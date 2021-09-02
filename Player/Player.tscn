@@ -1,36 +1,53 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://Assests/ball.png" type="Texture" id=2]
+[ext_resource path="res://Assests/Sprites/ball2.png" type="Texture" id=2]
 [ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=3]
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
-
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
 region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=7]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"frames": [ SubResource( 2 ) ],
 "loop": true,
-"name": "default",
+"name": "idle",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "run",
+"speed": 8.0
 } ]
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=8]
 _data = [ Vector2( 0, 0 ), 0.0, 1.4, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=9]
 colors = PoolColorArray( 1, 0, 0, 0, 1, 0, 0, 0.309804 )
 
-[sub_resource type="CircleShape2D" id=6]
-radius = 6.79179
+[sub_resource type="CircleShape2D" id=10]
+radius = 7.0
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -39,6 +56,7 @@ jump_height = -400
 gravity = 1600
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+visible = false
 position = Vector2( 0, -7.85724 )
 amount = 80
 lifetime = 2.0
@@ -51,18 +69,21 @@ initial_velocity = 4.0
 initial_velocity_random = 0.23
 angle = 360.0
 angle_random = 1.0
-color_ramp = SubResource( 7 )
+color_ramp = SubResource( 1 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 3 )
+frames = SubResource( 7 )
+animation = "idle"
+playing = true
 offset = Vector2( 0, -8 )
 
 [node name="Trail2D" type="Line2D" parent="."]
-position = Vector2( 0, -7.96668 )
+position = Vector2( 0, -8 )
+z_index = -1
 points = PoolVector2Array( 9.19654, -7.34974 )
 width = 15.0
-width_curve = SubResource( 4 )
-gradient = SubResource( 5 )
+width_curve = SubResource( 8 )
+gradient = SubResource( 9 )
 script = ExtResource( 3 )
 lifetime = 0.1
 distance = 1.0
@@ -70,4 +91,4 @@ segments = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.0393724, -9.18723 )
-shape = SubResource( 6 )
+shape = SubResource( 10 )

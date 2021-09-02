@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tilemap.png-4a6614ba9bdd2aa4eb3da62edb64e49c.stex"
+path="res://.import/ball_explode.png-3dcf4e19826851943af481aea458f59b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assests/Tilemaps/tilemap.png"
-dest_files=[ "res://.import/tilemap.png-4a6614ba9bdd2aa4eb3da62edb64e49c.stex" ]
+source_file="res://Assests/Sprites/ball_explode.png"
+dest_files=[ "res://.import/ball_explode.png-3dcf4e19826851943af481aea458f59b.stex" ]
 
 [params]
 

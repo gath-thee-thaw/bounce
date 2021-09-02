@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ball.png-55de79bed12fa19aabf0f63dd3f9bdc4.stex"
+path="res://.import/autotile_template_2x2.png-edf913b924792351f8f0adf8e7a4e569.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assests/ball.png"
-dest_files=[ "res://.import/ball.png-55de79bed12fa19aabf0f63dd3f9bdc4.stex" ]
+source_file="res://Assests/Tilemaps/autotile_template_2x2.png"
+dest_files=[ "res://.import/autotile_template_2x2.png-edf913b924792351f8f0adf8e7a4e569.stex" ]
 
 [params]
 

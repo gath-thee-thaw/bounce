@@ -11,9 +11,12 @@ var hit_the_ground = false
 var state
 var anim
 var new_anim
+var can_jump = true
 
 export (float, 0, 1.0) var friction = 0.1
 export (float, 0, 1.0) var acceleration = 0.25
+
+var flying_ball = preload("res://Player/Flying_Ball.tscn")
 
 func _ready():
 	change_state(IDLE)
@@ -34,9 +37,10 @@ func get_input():
 	var left = Input.is_action_pressed('go_left')
 	var jump = Input.is_action_just_pressed('jump')
 
-	if jump and is_on_floor():
+	if jump && can_jump && is_on_floor():
 		change_state(JUMP)
 		velocity.y = jump_height
+
 	if right:
 		change_state(RUN)
 		velocity.x += run_speed
@@ -55,8 +59,7 @@ func get_input():
 func _process(delta):
 	if new_anim != anim:
 		anim = new_anim
-		#$AnimationPlayer.play(anim)
-
+		$Sprite.play(anim)
 
 func _physics_process(delta):
 	get_input()
@@ -64,9 +67,8 @@ func _physics_process(delta):
 	if state == JUMP:
 		if is_on_floor():
 			change_state(IDLE)
-
 	velocity = move_and_slide(velocity, Vector2.UP)
-	
+
 	"""----Squeash and Strech----"""
 	if not is_on_floor():
 		hit_the_ground = false
@@ -80,3 +82,11 @@ func _physics_process(delta):
 	
 	$Sprite.scale.x = lerp($Sprite.scale.x, 1, 1 - pow(0.01, delta))
 	$Sprite.scale.y = lerp($Sprite.scale.y, 1, 1 - pow(0.01, delta))
+
+func hit():
+	var b = flying_ball.instance()
+	get_parent().add_child(b)
+	b.set_position(global_position)
+	print_debug("died")
+	#queue_free()
+
