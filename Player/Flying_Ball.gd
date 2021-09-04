@@ -11,11 +11,11 @@ func _on_randTimer_timeout():
 	rng.randomize()
 	var randx = rng.randf_range(-40.0, 40.0)
 	var randy = rng.randf_range(-0.2,-0.1)
-	apply_impulse(Vector2(0,-1),Vector2(randx,-20))
+	apply_impulse(Vector2(0,randy),Vector2(randx,-20))
 func _on_Timer_timeout():
 	$randTimer.stop()
 	destroyable = true
-func _on_Flying_Ball_body_entered(body):
+func _on_Flying_Ball_body_entered(_body):
 	if destroyable == true:
 		queue_free()
 		print_debug("is now dead")
